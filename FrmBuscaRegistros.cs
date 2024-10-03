@@ -42,6 +42,8 @@ namespace historico_consumo_combustivel
             dgvRegistros.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "kmRodados", HeaderText = "Km Rodados" });
             dgvRegistros.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "valor", HeaderText = "Valor" });
             // Adicione outras colunas conforme necessário
+
+            dgvRegistros.AllowUserToOrderColumns = true;
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -53,10 +55,12 @@ namespace historico_consumo_combustivel
                 r.destino.ToLower().Contains(criterio) ||
                 r.colaborador.ToLower().Contains(criterio) ||
                 r.veiculo.ToLower().Contains(criterio) ||
-                r.combustivel.ToLower().Contains(criterio)).ToList();
+                r.combustivel.ToLower().Contains(criterio)).OrderByDescending(ord => ord.idRegistro).ToList();
 
             // Atualiza o DataGridView com os resultados filtrados
             dgvRegistros.DataSource = resultadosFiltrados;
+            
+            dgvRegistros.AllowUserToOrderColumns = true;
         }
 
         private void dgvRegistros_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

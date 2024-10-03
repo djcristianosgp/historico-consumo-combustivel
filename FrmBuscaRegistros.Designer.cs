@@ -94,6 +94,7 @@
             // 
             dgvRegistros.AllowUserToAddRows = false;
             dgvRegistros.AllowUserToDeleteRows = false;
+            dgvRegistros.AllowUserToOrderColumns = true;
             dgvRegistros.BackgroundColor = Color.White;
             dgvRegistros.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvRegistros.Dock = DockStyle.Fill;

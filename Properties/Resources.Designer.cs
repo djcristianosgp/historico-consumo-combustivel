@@ -59,5 +59,17 @@ namespace historico_consumo_combustivel.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a PK2�CYd^\
+        ///Version �(�3d�c0b�`PK3�CY�c�H�*[Content_Types].xml �(���MN�0��by�N��*I%ZvE�G�$u�ȞT��Xp$��Kv��
+        ///K��7�����g�8�N(&amp;�]%o����Ƶ�칙��E]�        ///���R�*�es���d1M} �-r~��=�������	�zȺ\Q�}���ˣ�.y&apos;�r��*)��s�&amp;񂑟��:��Y�����#��k�W
+        ///&gt;2�        ///�s�Z���:��sf����Q#��        ///�&gt;��gr\�P�\{M�9~._PK2�CY�Y�}j�        ///DiagramLayout �(���MOA��Sg1 ��Q�`����pX��%.��]�+�w��Y��f3�N����t-�/ߒ�X2I�� [o restante da cadeia de caracteres foi truncado]&quot;;.
+        /// </summary>
+        internal static string HistoricoConsumoCombustivel {
+            get {
+                return ResourceManager.GetString("HistoricoConsumoCombustivel", resourceCulture);
+            }
+        }
     }
 }
