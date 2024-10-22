@@ -5,9 +5,11 @@ namespace historico_consumo_combustivel
 {
     public partial class Form1 : Form
     {
+        private Calculos calculos {get;set;}
         public Form1()
         {
             InitializeComponent();
+            calculos = new Calculos();
         }
         bool bCalculado = false;
         long iCodigoEdit = 0;
@@ -98,7 +100,7 @@ namespace historico_consumo_combustivel
             registro.mediaConsumo = Convert.ToDouble(txtMediaConsumo.Text);
             registro.consumo = registro.kmRodados / registro.mediaConsumo;
             registro.precoLitroCombustivel = Convert.ToDouble(txtPrecoCombustivel.Text);
-            registro.valor = registro.mediaConsumo * registro.precoLitroCombustivel;
+            registro.valor = Math.Round((registro.kmRodados/ registro.mediaConsumo) * registro.precoLitroCombustivel, 2);
             registro.veiculo = txtVeiculo.Text;
             registro.combustivel = cbxCombustivel.SelectedItem.ToString();
 
@@ -117,17 +119,14 @@ namespace historico_consumo_combustivel
         {
             if (!string.IsNullOrEmpty(txtKMInicial.Text) && !string.IsNullOrEmpty(txtKMFinal.Text))
             {
-                double kmInicial = Convert.ToDouble(txtKMInicial.Text);
-                double kmFinal = Convert.ToDouble(txtKMFinal.Text);
-                double kmPercorrido = kmFinal - kmInicial;
+                var kmPercorrido = calculos.CalculaKMRodado(txtKMInicial.Text, txtKMFinal.Text).Result;               
+                
                 if (kmPercorrido > 0)
                 {
                     txtKMRodados.Text = Math.Round(kmPercorrido, 2).ToString();
                     if (!string.IsNullOrEmpty(txtMediaConsumo.Text) && !string.IsNullOrEmpty(txtPrecoCombustivel.Text))
-                    {
-                        double mediaConsumo = Convert.ToDouble(txtMediaConsumo.Text);
-                        double precoCombustivel = Convert.ToDouble(txtPrecoCombustivel.Text);
-                        var resultado = (kmPercorrido / mediaConsumo) * precoCombustivel;
+                    {  
+                        var resultado = calculos.CalculaConsumo(txtMediaConsumo.Text, txtPrecoCombustivel.Text, kmPercorrido).Result;                            
                         txtResumo.Clear();
                         txtResumo.Text = $"Total consumido:{Environment.NewLine}R$ {Math.Round(resultado, 2)}";
                     }
